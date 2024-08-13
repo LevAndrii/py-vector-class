@@ -3,10 +3,17 @@ import math
 
 
 class Vector:
-    def __init__(self, x: int | float, y: int | float) -> None:
-        self.x = round(x, 2)
-        self.y = round(y, 2)
-    pass
+    def __init__(self, x_coord: int | float, y_coord: int | float) -> None:
+        self._x = round(x_coord, 2)
+        self._y = round(y_coord, 2)
+
+    @property
+    def x(self) -> int | float:
+        return self._x
+
+    @property
+    def y(self) -> int | float:
+        return self._y
 
     def __add__(self, other: Vector) -> Vector:
         return Vector(self.x + other.x, self.y + other.y)
@@ -23,9 +30,9 @@ class Vector:
     @classmethod
     def create_vector_by_two_points(
             cls, start_point: tuple, end_point: tuple) -> Vector:
-        x = end_point[0] - start_point[0]
-        y = end_point[1] - start_point[1]
-        return cls(x, y)
+        x_diff = end_point[0] - start_point[0]
+        y_diff = end_point[1] - start_point[1]
+        return cls(x_diff, y_diff)
 
     def get_length(self) -> float | int:
         return math.sqrt(self.x ** 2 + self.y ** 2)
